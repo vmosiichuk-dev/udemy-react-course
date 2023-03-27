@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@200;300;400;500;600;700;800;900&subset=latin,latin-ext');
+
+body {
+  margin: 0;
+  font-family: "Unbounded", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --main: #151111ab;
+  --accent: #ffffff;
+  --dark: #0d001673;
+  --shadow: 14px 14px 0px -4px #4c4c45;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+button,
+input,
+input::placeholder {
+  font-family: "Didact Gothic";
+  background-color: var(--accent);
+  color: var(--dark);
+}

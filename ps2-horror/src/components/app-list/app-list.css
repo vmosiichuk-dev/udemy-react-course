@@ -1,0 +1,11 @@
+.app-list {
+    padding: 25px;
+    border-radius: 12px;
+    color: var(--accent);
+    box-shadow: var(--shadow);
+    background-color: var(--main);
+    border: 3px solid var(--accent);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}

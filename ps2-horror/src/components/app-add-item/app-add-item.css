@@ -1,0 +1,9 @@
+.app-add-item {
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 12px;
+    color: var(--accent);
+    box-shadow: var(--shadow);
+    background-color: var(--main);
+    border: 3px solid var(--accent);
+}
