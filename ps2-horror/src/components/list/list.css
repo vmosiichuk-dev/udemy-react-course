@@ -1,0 +1,11 @@
+.list {
+    height:100%;
+    color: var(--accent);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0;
+    gap: 105px 15px;
+    padding: 35px 35px 97px 35px;
+    overflow-y:scroll;
+  }  

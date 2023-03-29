@@ -18,7 +18,7 @@ This course is aimed at learning React in detail and to immediately put it into 
 
 React 18 + Redux
 
-Progress: ![](https://geps.dev/progress/0)
+Progress: ![](https://geps.dev/progress/10)
 
 
 [JavaScript course section repo](https://www.github.com/vladnomad/udemy-js-course/) 

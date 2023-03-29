@@ -1,3 +1,3 @@
 /node_modules
 *.json
-!my-app/*.json
+!ps2-horror/*.json
