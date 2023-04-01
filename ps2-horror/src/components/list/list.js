@@ -1,23 +1,17 @@
 import "./list.css";
 import ListItem from "../list-item/list-item";
 
-function List() {
+function List({data}) {
+
+    const elements = data.map(item => {
+        return (
+            <ListItem key={item.id} src={`./img/${item.id}.jpg`} {...item} />
+        );
+    });
+
     return (
         <ul className="list">
-            <ListItem/> 
-            <ListItem/> 
-            <ListItem/>
-            <ListItem/> 
-            <ListItem/>
-            <ListItem/> {/* 6 */}
-            <ListItem/> 
-            <ListItem/> 
-            <ListItem/>
-            <ListItem/> 
-            <ListItem/>
-            <ListItem/> {/* 12 */}
-            <ListItem/> 
-            <ListItem/>
+            {elements}
         </ul>
     );
 }

@@ -20,7 +20,7 @@
 
 .info h1 {
     margin: 0 0 2.5rem 0;
-    padding-left:15%;
+    width:60%;
 }
 
 .info-p:nth-child(0) {

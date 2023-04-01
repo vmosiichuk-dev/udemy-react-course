@@ -11,7 +11,6 @@
     margin: 20px 0;
     background: transparent;
     transition: box-shadow .1s ease, border-color .1s ease;
-    box-shadow: 0px 0px 4px transparent;
     border: none;
     border-bottom: 1px solid #9c94be;
     width: 100%;
@@ -59,7 +58,8 @@
 
 .icon-search {
     display: block;
-    width: 20px;
-    height: 18px;
-    background-color: var(--accent);
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 10px;
 }
