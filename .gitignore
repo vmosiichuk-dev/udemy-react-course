@@ -1,3 +1,4 @@
 /node_modules
-*.json
-!ps2-horror/*.json
+/.vscode
+
+react101/node_modules

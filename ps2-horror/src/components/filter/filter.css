@@ -1,9 +1,0 @@
-.btn-group {
-    display: flex;
-    justify-content: space-between;
-}
-
-.btn-group .btn {
-    width: auto;
-    white-space:nowrap;
-}
