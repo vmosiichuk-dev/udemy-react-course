@@ -1,6 +1,7 @@
+// Update {last} with the last completed lecture
+let last = 144;
 const start = 117,
-      end = 213,
-      last = 138;
+      end = 213;
 
 function calculateProgress(start, end, last) {
     const total = end - start,
