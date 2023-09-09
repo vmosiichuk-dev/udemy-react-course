@@ -105,6 +105,11 @@ class App extends Component {
 		}
 	}
 
+	static staticMethod = () => {
+		console.log("static");
+	}
+	static staticVariable = "static variable";
+
 	render() {
 		return (
 			<Wrapper>
@@ -159,6 +164,9 @@ class App extends Component {
 		)
 	}
 }
+
+App.staticMethod();
+console.log(App.staticVariable);
 
 export {Title};
 export default App;
