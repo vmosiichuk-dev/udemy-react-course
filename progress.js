@@ -1,5 +1,5 @@
 // Update {last} with the last completed lecture
-let last = 144;
+let last = 152;
 const start = 117,
       end = 213;
 
@@ -13,5 +13,5 @@ function calculateProgress(start, end, last) {
 
 const progress = calculateProgress(start, end, last);
 
-// Using Quokka.js to visualise progress without needing to run code
+// Using Quokka.js extension to visualise progress without needing to run code
 progress
