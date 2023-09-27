@@ -1,7 +1,9 @@
 import {Component, StrictMode} from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import {Container, Row, Col, Carousel} from "react-bootstrap";
 import "./App.scss";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 export const StyledButton = styled.button`
 	display: block;
@@ -127,42 +129,47 @@ class App extends Component {
 					</StyledButton>
 				</Cont>
 
-
-				<Container className="mb-5 mt-5">
-					<Row>
-						<Col>1 of 2</Col>
-						<Col>
-							<Carousel>
-								<Carousel.Item>
-									<img alt="" text="First slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
-									<Carousel.Caption>
-									<h3>First slide label</h3>
-									<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-									</Carousel.Caption>
-								</Carousel.Item>
-								<Carousel.Item>
-									<img alt="" text="Second slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
-									<Carousel.Caption>
-									<h3>Second slide label</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-									</Carousel.Caption>
-								</Carousel.Item>
-								<Carousel.Item>
-									<img alt="" text="Third slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
-									<Carousel.Caption>
-									<h3>Third slide label</h3>
-									<p>
-										Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-									</p>
-									</Carousel.Caption>
-								</Carousel.Item>
-							</Carousel>
-						</Col>
-					</Row>
-				</Container>
+				<ErrorBoundary>
+					<Container className="mb-5 mt-5">
+						<Row>
+							<Col>1 of 2</Col>
+							<Col>
+								<Carousel>
+									<Carousel.Item>
+										<img alt="" text="First slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
+										<Carousel.Caption>
+										<h3>First slide label</h3>
+										<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+										</Carousel.Caption>
+									</Carousel.Item>
+									<Carousel.Item>
+										<img alt="" text="Second slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
+										<Carousel.Caption>
+										<h3>Second slide label</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+										</Carousel.Caption>
+									</Carousel.Item>
+									<Carousel.Item>
+										<img alt="" text="Third slide" src="https://developer.mozilla.org/pimg/aHR0cHM6Ly9zLnprY2RuLm5ldC9BZHZlcnRpc2Vycy9jOTNkNDZkYWQzOWI0ODQxYjViZmFmM2Q2MWY5MWUwMi5wbmc%3D.gQQg%2BnseACbpRZ3EBXomUnq99f45Jsy%2F5lXWXYgGB0s%3D" />
+										<Carousel.Caption>
+										<h3>Third slide label</h3>
+										<p>
+											Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+										</p>
+										</Carousel.Caption>
+									</Carousel.Item>
+								</Carousel>
+							</Col>
+						</Row>
+					</Container>
+				</ErrorBoundary>
 			</Wrapper>
 		)
 	}
+}
+
+App.propTypes = {
+	active: PropTypes.bool
 }
 
 App.staticMethod();
