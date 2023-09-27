@@ -1,9 +1,10 @@
-import {Component, StrictMode} from "react";
+import {Component, StrictMode, React} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {Container, Row, Col, Carousel} from "react-bootstrap";
 import "./App.scss";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import BootstrapTest from "../BootstrapTest/BootstrapTest";
 
 export const StyledButton = styled.button`
 	display: block;
@@ -99,6 +100,56 @@ const action = () => {
 	alert("ACTION");
 }
 
+const PropsChildrenExample = (props) => {
+	return (
+		<div className={"border-" + props.color}>
+			{/* {props.children} */}
+			{ React.Children.map(props.children, child => {
+				return React.cloneElement(child, {className: "shadow"})
+			}) }
+		</div>
+	)
+}
+
+const Specialization = (props) => {
+	return (
+		<div style={{"width": "600px", "margin": "auto"}}>
+			<PropsChildrenExample color={"primary"}>
+				<h2>Specialization heading</h2>
+			</PropsChildrenExample>
+		</div>
+	)
+}
+
+const Message = (props) => {
+	return (
+		<h2>The counter is {props.counter}</h2>
+	)
+}
+
+class Counter extends Component {
+	state = {
+		counter: 0
+	}
+
+	changeCounter = () => {
+		this.setState(({counter}) => ({
+			counter: counter + 1
+		}))
+	}
+
+	render() {
+		return (
+			<>
+				<button className={"btn btn-primary"} onClick={this.changeCounter}>
+					Count up
+				</button>
+				{this.props.render(this.state.counter)}
+			</>
+		)
+	}
+}
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -115,6 +166,31 @@ class App extends Component {
 	render() {
 		return (
 			<Wrapper>
+				<Counter render={counter => (
+					<Message counter={counter}/>
+				)} />
+
+				<Specialization/>
+				<BootstrapTest
+					left = {
+						<PropsChildrenExample color={"primary"}>
+							<h2>This is the left heading</h2>
+							<h2>Color is primary</h2>
+						</PropsChildrenExample>
+					}
+					right = {
+						<PropsChildrenExample color={"secondary"}>
+							<h2>This is the right heading</h2>
+							<h2>Color is secondary</h2>
+						</PropsChildrenExample>
+					}
+				/>
+
+				<PropsChildrenExample color={"primary"}>
+					<h2>This is the first heading</h2>
+					<h2>And this is the second one</h2>
+				</PropsChildrenExample>
+
 				<StrictMode>
 					<Title />
 					<H3>Description</H3>

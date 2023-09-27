@@ -1,5 +1,5 @@
 // Update {last} with the last completed lecture
-let last = 155;
+let last = 158;
 const start = 117,
       end = 213;
 
