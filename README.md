@@ -1,17 +1,17 @@
 # [Full Course on JavaScript + React](https://www.udemy.com/course/javascript_full/)
-### :star::star::star::star::star: (16,417 Ratings)
+### :star::star::star::star::star: (16,915 Ratings)
 
 ```javascript
 courseDetails {
     author: Ivan Petrichenko,
     rating: 4.8,    
-    ratingCount: 16 417,
-    students: 45 238,
+    ratingCount: 16 915,
+    students: 45 560,
     tests: 2,
     tasks: 55,
     lectures: 224,
     videoHoursTotal: 67
-    lastUpdate: 06.2023
+    lastUpdate: 10.2023
 }
 ```
 This course, authored by Ivan Petrichenko, offers an in-depth exploration of JavaScript and React, coupled with practical applications. Throughout the course, each theoretical concept is followed by a hands-on test or practice task, fostering interactive web development skills. The curriculum is divided into two main sections:
@@ -22,7 +22,7 @@ Progress: ![100%](https://geps.dev/progress/100)
 
 ### [React 18 + Redux](https://www.github.com/vladnomad/udemy-react-course/)
 
-Progress: ![45%](https://geps.dev/progress/45)
+Progress: ![50%](https://geps.dev/progress/50)
 
 ## What the Course Covers
 
