@@ -26,6 +26,18 @@
 	min-height: 48px;
 }
 
+.flex {
+	display: flex;
+}
+
+html {
+	height: 100dvh;
+}
+
+.w-90 {
+	width: 90%;
+}
+
 @keyframes App-logo-spin {
 	from {
 		transform: rotate(0deg);
