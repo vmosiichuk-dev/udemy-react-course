@@ -1,13 +1,15 @@
 import React, { StrictMode } from "react"
-import ReactDOM from "react-dom"
-import "./index.css"
+import ReactDOMClient from "react-dom/client"
 import App from "./App"
-
+// import TestComponent from "./TestComponent"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "./index.css"
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = ReactDOMClient.createRoot(container)
+
+root.render(
     <StrictMode>
-    	<App/>
-    </StrictMode>,
-	document.getElementById("root")
+        <App />
+    </StrictMode>
 )
