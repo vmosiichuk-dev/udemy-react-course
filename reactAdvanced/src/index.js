@@ -1,6 +1,6 @@
 import React, { StrictMode } from "react"
 import ReactDOMClient from "react-dom/client"
-import App from "./App"
+import App from "./components/App"
 // import TestComponent from "./TestComponent"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"

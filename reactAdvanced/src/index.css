@@ -8,3 +8,148 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.App {
+	text-align: center;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+.min-h-48 {
+	min-height: 48px;
+}
+
+.flex {
+	display: flex;
+}
+
+.btn.btn-games {
+	margin: 1rem;
+	border: 1px solid steelblue;
+	border-radius: 8px;
+	background: #0009;
+	color: white;
+	padding: .75rem;
+}
+
+.games {
+	background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+	width: 100dvw;
+	height: 100dvh;
+}
+
+.game-list {
+	display: flex;
+	gap: 1rem;
+	border: 1px solid steelblue;
+	border-radius: 8px;
+	margin-inline: 1rem;
+	padding: 1rem;
+	background: #1768705c;
+	overflow-x: scroll;
+	min-height: calc(400px + 2rem);
+}
+
+.game {
+	padding: 1rem;
+	height: 400px;
+	display: grid;
+}
+
+.game__cover-img {
+	min-height: calc(100% - 20px);
+	max-height: calc(100% - 20px);
+}
+
+.game__title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+	text-wrap: nowrap;
+	height: 2.5rem;
+	color: white;
+}
+
+.app__header {
+	position: fixed;
+	top: 0;
+	width: 100dvw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 65px;
+	z-index: 10;
+	border-bottom: 1px solid black;
+	background: #e2d1c366;
+}
+
+main {
+	position: relative;
+	top: 65px;
+}
+
+.app__header ul {
+	display: flex;
+	gap: .5rem;
+	margin: 0;
+}
+
+.app__title {
+	margin: 0;
+	text-align: center;
+	line-height: 12px;
+	margin-bottom: 8px;
+}
+
+.app__header a {
+	color: black;
+	text-decoration: none;
+	font-family: monospace;
+	font-weight: 700;
+	font-size: .875rem;
+}
+
+li {
+	list-style-type: none;
+}
+
+html {
+	height: 100dvh;
+}
+
+.w-90 {
+	width: 90%;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
+}

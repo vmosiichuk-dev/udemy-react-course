@@ -22,7 +22,7 @@ Progress: ![100%](https://geps.dev/progress/100)
 
 ### [React 18 + Redux](https://www.github.com/vladnomad/udemy-react-course/)
 
-Progress: ![60%](https://geps.dev/progress/60)
+Progress: ![65%](https://geps.dev/progress/65)
 
 ## What the Course Covers
 
