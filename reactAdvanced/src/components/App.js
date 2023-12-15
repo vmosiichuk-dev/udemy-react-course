@@ -1,8 +1,13 @@
-import { useState, useCallback } from "react"
+import { lazy, Suspense, useState, useCallback } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom" 
-import { MainPage, GamesPage, Page404, SingleGamePage } from "../pages"
+/* import { MainPage, GamesPage, SingleGamePage, Page404 } from "../pages"*/
 import useIGDB from "../services/service"
 import AppHeader from "./AppHeader"
+
+const Page404 = lazy(() => import("../pages/404"))
+const MainPage = lazy(() => import("../pages/MainPage"))
+const GamesPage = lazy(() => import("../pages/GamesPage"))
+const SingleGamePage = lazy(() => import("../pages/SingleGamePage"))
 
 function App() {
     const [data, setData] = useState([])
@@ -126,22 +131,33 @@ function App() {
             const allGames = [...ratedGames, ...notRatedGames]
 
             setData(allGames)
+
+            const { logToConsole, alertUser } = await import("./DynamicImports")
+            logToConsole()
+            alertUser()
+            
         } catch (error) {
             console.error("Error fetching data from the API:", error)
         }
     }, [getToken, getGames])
+
+    import("./DynamicImports")
+        .then(object => object.default())
+        .catch()
 
 	return (
         <Router>
             <div className="flex">
                 <AppHeader />
                 <main>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} />
-                        <Route path="/games" element={<GamesPage handleWelcomeClick={handleWelcomeClick} data={data} />} />
-                        <Route path="/games/:gameId" element={<SingleGamePage data={data} />} />
-                        <Route path="*" element={<Page404 />} />
-                    </Routes>
+                    <Suspense fallback={<p>Loading...</p>/*<Loader />*/}>
+                        <Routes>
+                            <Route path="/" element={<MainPage />} />
+                            <Route path="/games" element={<GamesPage handleWelcomeClick={handleWelcomeClick} data={data} />} />
+                            <Route path="/games/:gameId" element={<SingleGamePage data={data} />} />
+                            <Route path="*" element={<Page404 />} />
+                        </Routes>
+                    </Suspense>
                 </main>
             </div>
         </Router>
