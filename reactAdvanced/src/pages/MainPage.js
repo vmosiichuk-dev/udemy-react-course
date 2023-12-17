@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from "react"
+import { useState, useEffect, useCallback, useMemo, useRef, useReducer } from "react"
 
 function useInputWithValidation(init) {
     const [value, setValue] = useState(init)
@@ -46,22 +46,47 @@ const Slide = () => {
     </>)
 }
 
-const Slider = () => {
+function reducer(state, action) {
+    switch (action.type) {
+        case "toggle": return { 
+            state: !state.state 
+        }
+        case "slow": return { 
+            state: 300 
+        }
+        case "fast": return { 
+            state: 700 
+        }
+        case "custom": return {
+            state: action.payload
+        }
+        default: throw new Error()
+    }
+}
+
+function handleInitialState(initialState) {
+    return { state: initialState }
+}
+
+const Slider = ({ initialState }) => {
     const [slide, setSlide] = useState(0)
-    const [autoplay, setAutoplay] = useState(false)
     const text = useInputWithValidation("")
     const textArea = useInputWithValidation("")
     const textColor = text.validateInput() ? "text-danger" : null
     const myRef = useRef(null)
 
+//  const [autoplay, setAutoplay] = useState(false)
+//  const initialAutoplayState = { state: false }
+    const [autoplay, dispatch] = useReducer(reducer, initialState, handleInitialState)
+
     function changeSlide(i) {
         setSlide(slide => slide + i)
     }
-
+/* 
     function toggleAutoplay() {
         setAutoplay(autoplay => !autoplay)
     }
-
+ */
     const focusMyRef = () => {
         myRef.current.focus()
     }
@@ -84,7 +109,7 @@ const Slider = () => {
             <div className="text-center min-h-48">
                 Counter: { slide } 
                 <br/> 
-                { autoplay ? "auto" : null }
+                { autoplay.state ? "autoplay is active" : null }
             </div>
             <div className="buttons mt-3">
                 <button 
@@ -99,8 +124,23 @@ const Slider = () => {
                 </button>
                 <button 
                     className="btn btn-primary me-2"
-                    onClick={toggleAutoplay}>
+                    onClick={() => dispatch({type: "toggle"})}>
                     Toggle autoplay
+                </button>
+                <button 
+                    className="btn btn-primary me-2"
+                    onClick={() => dispatch({type: "slow"})}>
+                    Slow autoplay
+                </button>
+                <button 
+                    className="btn btn-primary me-2"
+                    onClick={() => dispatch({type: "fast"})}>
+                    Fast autoplay
+                </button>
+                <button 
+                    className="btn btn-primary me-2"
+                    onClick={(e) => dispatch({type: "custom", payload: +e.target.textContent})}>
+                    1000
                 </button>
                 <button 
                     className="btn btn-primary me-2"
