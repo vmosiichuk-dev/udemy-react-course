@@ -1,4 +1,4 @@
-let current = 175
+let current = 180
 // Update { current } with the last completed lecture
 
 const start = 117

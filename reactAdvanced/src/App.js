@@ -1,96 +1,132 @@
-import { useState, Component, createContext, useContext } from "react"
+import { useState, useEffect } from "react"
 import { Container } from "react-bootstrap"
 
-const dataContext = createContext({
-    mail: "name@example.com",
-    text: "some text"
-})
+/* 
+const fn = (a) => {
+    return (b) => {
+        console.log(a + b)
+    }
+}
 
-const { Provider, Consumer } = dataContext
+fn(1)(2) // 3
 
-const Form = (props) => {
+
+const fn = (a) => {
+    return class extends Component {
+        render() {
+            return <h1>Hello world!</h1>
+        }
+    }
+}
+*/
+
+const SliderFirst = (props) => {
     return (
         <Container>
-            <form className="w-50 border mt-5 p-3 m-auto">
-                <div className="mb-3">
-                    <label htmlFor="exampleFormControlInput1" className="form-label mt-3">Email address</label>
-                    {/* <InputComponent /> */}
-                    <InputFunctional />
+            <div className="w-50 border mt-5 p-3 m-auto">
+                <img className="d-block w-90" alt="Slide" src="https://www.planetware.com/photos-large/I/italy-florence-cathedral-of-santa-maria-del-fiore.jpg" />
+                <div className="text-center">Active slide: { props.slide } ({props.name})</div>
+                <div className="buttons mt-3">
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={() => props.changeSlide(-1)}>
+                        -1
+                    </button>
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={() => props.changeSlide(1)}>
+                        +1
+                    </button>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                    <textarea value={props.text} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-            </form>
+            </div>
         </Container>
     )
 }
 
-class InputComponent extends Component {
-    static contextType = dataContext
-
-    render() {
-        return (
-            <input 
-                value={this.context.mail} 
-                type="email" 
-                className="form-control" 
-                id="exampleFormControlInput1" 
-                placeholder="name@example.com"
-            />
-        )
-    }
-}
-
-const InputFunctional = () => {
-    const context = useContext(dataContext)
-
+const SliderSecond = ({ slide, autoplay, changeSlide, setAutoplay }) => {
     return (
-        <input 
-            value={context.mail} 
-            type="email" 
-            className="form-control" 
-            id="exampleFormControlInput1" 
-            placeholder="name@example.com"
-        />
+        <Container>
+            <div className="w-50 border mt-5 p-3 m-auto">
+                <img className="d-block w-90" alt="Slide" src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" />
+                <div className="text-center">
+                    Active slide: { slide }
+                    <br/>
+                    { autoplay ? "Autoplay is active" : null }
+                </div>
+                <div className="buttons mt-3">
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={() => changeSlide(-1)}>
+                        -1
+                    </button>
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={() => changeSlide(1)}>
+                        +1
+                    </button>
+                    <button 
+                        className="btn btn-primary me-2"
+                        onClick={() => setAutoplay(autoplay => !autoplay)}>
+                        Toggle autoplay
+                    </button>
+                </div>
+            </div>
+        </Container>
     )
 }
 
-// InputComponent.contextType = dataContext
+const withSlider = (BaseComponent, getData) => {
+    return (props) => {
+        const [slide, setSlide] = useState(0)
+        const [autoplay, setAutoplay] = useState(false)
+    
+        useEffect(() => {
+            setSlide(getData())
+        }, [])
+    
+        function changeSlide(i) {
+            setSlide(slide => slide + i)
+        }
 
-            /* 
-            <Consumer>
-                {value => {
-                    return (
-                        <input 
-                            value={value.mail} 
-                            type="email" 
-                            className="form-control" 
-                            id="exampleFormControlInput1" 
-                            placeholder="name@example.com"
-                        />
-                    )
-                }}
-            </Consumer> 
-            */
+        return <BaseComponent 
+            {...props}
+            slide={slide} 
+            autoplay={autoplay} 
+            setAutoplay={setAutoplay}
+            changeSlide={changeSlide} 
+        />
+    }
+}
+
+const getDataFromFirstFetch = () => { return 10 }
+const getDataFromSecondFetch = () => { return 20 }
+
+const SliderWithFirstFetch = withSlider(SliderFirst, getDataFromFirstFetch)
+const SliderWithSecondFetch = withSlider(SliderSecond, getDataFromSecondFetch)
+
+const withLogger = ContainerComponent => props => {
+    useEffect(() => {
+        console.log("first render")
+    }, [])
+
+    return <ContainerComponent {...props} />
+}
+
+const HelloWorld = () => {
+    return (
+        <h1>Hello World!</h1>
+    )
+}
+
+const HelloWorldWithLogger = withLogger(HelloWorld)
 
 function App() {
-    const [data, setData] = useState({
-        mail: "name@example.com",
-        text: "some text"
-    })
-
     return (
-        <Provider value={data} >
-            <Form text={data.text} />
-            <button 
-                onClick={() => setData({
-                    mail: "second@example.com",
-                    text: "another text"
-                })}>
-                Click me
-            </button>
-        </Provider>
+        <>
+            <HelloWorldWithLogger />
+            <SliderWithFirstFetch name="name" />
+            <SliderWithSecondFetch />
+        </>
     )
 }
 
