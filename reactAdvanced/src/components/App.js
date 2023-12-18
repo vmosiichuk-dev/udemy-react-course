@@ -11,7 +11,7 @@ const SingleGamePage = lazy(() => import("../pages/SingleGamePage"))
 
 function App() {
     const [data, setData] = useState([])
-    const { getToken, getGames } = useIGDB()
+    const { getToken, getGames, process, setProcess } = useIGDB()
 
     const filterGame = (game) => {
         let genres = [],
@@ -132,14 +132,15 @@ function App() {
 
             setData(allGames)
 
-            const { logToConsole, alertUser } = await import("./DynamicImports")
+            const { logToConsole } = await import("./DynamicImports")
             logToConsole()
-            alertUser()
+            setProcess("confirmed")
             
         } catch (error) {
+            setProcess("error")
             console.error("Error fetching data from the API:", error)
         }
-    }, [getToken, getGames])
+    }, [getToken, getGames, setProcess])
 
     import("./DynamicImports")
         .then(object => object.default())
@@ -153,7 +154,7 @@ function App() {
                     <Suspense fallback={<p>Loading...</p>/*<Loader />*/}>
                         <Routes>
                             <Route path="/" element={<MainPage />} />
-                            <Route path="/games" element={<GamesPage handleWelcomeClick={handleWelcomeClick} data={data} />} />
+                            <Route path="/games" element={<GamesPage handleWelcomeClick={handleWelcomeClick} data={data} process={process} />} />
                             <Route path="/games/:gameId" element={<SingleGamePage data={data} />} />
                             <Route path="*" element={<Page404 />} />
                         </Routes>

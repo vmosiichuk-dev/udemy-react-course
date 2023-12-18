@@ -1,12 +1,12 @@
 import { useHttp } from "../hooks/http.hook"
 
 const useIGDB = () => {
-    const { loading, request, error } = useHttp()
+    const { loading, error, process, setProcess, request } = useHttp()
 
     const _apiBase = "https://api.igdb.com/v4"
-    const proxyURL = process.env.REACT_APP_PROXY_URL
-    const clientID = process.env.REACT_APP_CLIENT_ID
-    const clientSecret = process.env.REACT_APP_CLIENT_SECRET
+    const proxyURL = ""
+    const clientID = ""
+    const clientSecret = ""
 
     const getToken = async () => {
         const tokenUrl = "https://id.twitch.tv/oauth2/token"
@@ -36,7 +36,7 @@ const useIGDB = () => {
         return await request(gamesURL, data)
     }
 
-    return { loading, error, getToken, getGames }
+    return { loading, error, process, setProcess, getToken, getGames }
 }
 
 export default useIGDB
