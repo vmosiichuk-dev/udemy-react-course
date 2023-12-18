@@ -36,3 +36,38 @@
 		transform: rotate(360deg);
 	}
 }
+
+.modal {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.modal-enter {
+	opacity: 0;
+}
+
+.modal-enter-active {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
+}
+
+.modal-enter-done {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal-exit {
+	opacity: 1;
+}
+
+.modal-exit-active {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
+}
+
+.modal-exit-done {
+	opacity: 0;
+	visibility: hidden;
+}
