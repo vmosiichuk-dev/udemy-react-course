@@ -1,9 +1,6 @@
 const initialState = {
     deities: [],
     filters: [],
-    nameValue: "",
-    domainValue: "",
-    elementValue: "",
     status: "idle",
     activeFilter: "all"
 }
@@ -14,6 +11,10 @@ const reducer = (state = initialState, action) => {
             ...state,
             status: "loading"
         }
+        case "STATUS_ERROR": return {
+            ...state,
+            status: "error"
+        }
         case "STATUS_DEITIES_FETCHED": return {
             ...state,
             deities: action.payload,
@@ -23,22 +24,6 @@ const reducer = (state = initialState, action) => {
             ...state,
             filters: action.payload,
             status: "idle"
-        }
-        case "STATUS_ERROR": return {
-            ...state,
-            status: "error"
-        }
-        case "FORM_INPUT_NAME": return {
-            ...state,
-            nameValue: action.payload
-        }
-        case "FORM_INPUT_DOMAIN": return {
-            ...state,
-            domainValue: action.payload
-        }
-        case "FORM_INPUT_ELEMENT": return {
-            ...state,
-            elementValue: action.payload
         }
         case "FORM_SUBMIT": return {
             ...state,

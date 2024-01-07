@@ -15,16 +15,20 @@ const App = () => {
     useEffect(() => {
         dispatch(fetching())
         request("http://localhost:3001/filters")
-            .then(data => dispatch(fetchedFilters(data)) )
+            .then(data => {
+                console.log(data)
+                dispatch(fetchedFilters(data))
+             })
             .catch(() => dispatch(error()) )
         
         dispatch(fetching())
         request("http://localhost:3001/deities")
-            .then(data => dispatch(fetchedDeities(data)) )
+            .then(data => {
+                console.log(data)
+                dispatch(fetchedDeities(data))
+             })
             .catch(() => dispatch(error()) )
-
-        // eslint-disable-next-line
-    }, [])
+    }, [request, dispatch])
 
     return (
         <main className="app">

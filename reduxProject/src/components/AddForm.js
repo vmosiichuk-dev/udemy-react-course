@@ -1,14 +1,18 @@
+import { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { name, domain, element, submit, error } from "../store/actions"
+import { submit, error } from "../store/actions"
 import { useHttp } from "../hooks/http.hook"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
-    const { nameValue, domainValue, elementValue, filters } = useSelector(state => state)
+    const filters = useSelector(state => state.filters)
+    const [nameValue, setNameValue] = useState("")
+    const [domainValue, setDomainValue] = useState("")
+    const [elementValue, setElementValue] = useState("")
     const dispatch = useDispatch()
     const { request } = useHttp()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = useCallback(e => {
         e.preventDefault()
 
         const userAddedDeity = {
@@ -18,19 +22,30 @@ const AddForm = () => {
             element: elementValue
         }
 
-        try {
-            await request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
-            dispatch(submit(userAddedDeity))
-        } catch (err) {
+        request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
+        .then(dispatch(submit(userAddedDeity)))
+        .then(() => {
+            setNameValue("")
+            setDomainValue("")
+            setElementValue("")
+        })
+        .catch(err => { 
             dispatch(error())
-        }
-    }
+            console.error("Error deleting item", err)
+        })
+    }, [request, dispatch, nameValue, domainValue, elementValue, setNameValue, setDomainValue, setElementValue])
 
-    const renderOptions = (arr) => {
-        return arr.map((item, i) => {
-            let option = (<option key={`option ${i + 1}`} value={item}>{item}</option>)
-            if (i === 0) option = null
-            return option
+    const renderOptions = (filters) => {
+        if (filters.length === 0) return null
+
+        return filters.map(({ filter }) => {
+            if (filter === "all") return null
+
+            return <option 
+                key={`option: ${filter}`} 
+                value={filter}>
+                {filter}
+            </option>
         })
     }
     
@@ -43,7 +58,7 @@ const AddForm = () => {
                 <input 
                     required
                     value={nameValue}
-                    onChange={(e) => dispatch(name(e.target.value))}
+                    onChange={(e) => setNameValue(e.target.value)}
                     type="text" 
                     name="name" 
                     className="form-control" 
@@ -56,7 +71,7 @@ const AddForm = () => {
                 <input
                     required
                     value={domainValue}
-                    onChange={(e) => dispatch(domain(e.target.value))}
+                    onChange={(e) => setDomainValue(e.target.value)}
                     type="text"
                     name="domain" 
                     className="form-control" 
@@ -69,7 +84,7 @@ const AddForm = () => {
                 <select 
                     required
                     value={elementValue}
-                    onChange={(e) => dispatch(element(e.target.value))}
+                    onChange={(e) => setElementValue(e.target.value)}
                     className="form-select" 
                     id="element" 
                     name="element">

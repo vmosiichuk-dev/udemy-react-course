@@ -19,12 +19,6 @@
       "element": "water"
     },
     {
-      "id": "2acd600e-d3fc-4aeb-a35d-442b69e7f60a",
-      "name": "Aphrodite",
-      "domain": "Goddess of love, lust, passion, pleasure, beauty, and sexuality",
-      "element": "earth"
-    },
-    {
       "id": "cd3e8819-1669-4fe7-8849-6bc2277ad8b9",
       "name": "Nyx",
       "domain": "Primordial goddess of the night and hellhounds",
@@ -41,13 +35,40 @@
       "name": "Hades",
       "domain": "God of Underworld",
       "element": "earth"
+    },
+    {
+      "id": "7e265024-e53d-45da-9208-909489620a42",
+      "name": "Selene",
+      "domain": "Goddess and personification of the Moon",
+      "element": "wind"
+    },
+    {
+      "id": "966cec26-11f8-4943-983b-4d703fdaeddd",
+      "name": "Aphrodite",
+      "domain": "Goddess of love, lust, passion, pleasure, beauty, and sexuality",
+      "element": "water"
     }
   ],
   "filters": [
-    "all",
-    "fire",
-    "water",
-    "wind",
-    "earth"
+    {
+      "filter": "all",
+      "className": "btn-outline-dark"
+    },
+    {
+      "filter": "fire",
+      "className": "btn-danger"
+    },
+    {
+      "filter": "water",
+      "className": "btn-primary"
+    },
+    {
+      "filter": "wind",
+      "className": "btn-warning"
+    },
+    {
+      "filter": "earth",
+      "className": "btn-success"
+    }
   ]
 }

@@ -8,10 +8,8 @@ import nyx from "../assets/nyx.webp"
 import selene from "../assets/selene.webp"
 import theia from "../assets/theia.webp"
 
-const ListItem = ({ id, name, domain, element, activeFilter, handleDelete }) => {
-    let src, 
-        bgClass = "",
-        filterClass = ""
+const ListItem = ({ id, name, domain, element, handleDelete }) => {
+    let src, bgClass = ""
 
     switch (element) {
         case "fire": bgClass = "bg-danger"; break
@@ -33,10 +31,8 @@ const ListItem = ({ id, name, domain, element, activeFilter, handleDelete }) => 
         default: src = placeholder
     }
 
-    if (activeFilter !== element && activeFilter !== "all") filterClass = "d-none"
-
     return (
-        <li data-deity-id={id} className={`card flex-row mb-4 shadow-lg ${bgClass} bg-gradient ${filterClass} bg-opacity`}>
+        <li data-deity-id={id} className={`card flex-row mb-4 shadow-lg ${bgClass} bg-gradient bg-opacity`}>
             <img src={src}
                  className="img-fluid w-25 d-inline min-w-140" 
                  alt="deity avatar" 
@@ -46,7 +42,7 @@ const ListItem = ({ id, name, domain, element, activeFilter, handleDelete }) => 
                 <p className="card-text">{domain}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button type="button" className="btn-close btn-close" aria-label="Close" onClick={handleDelete}></button>
+                <button type="button" className="btn-close btn-close" aria-label="Close" onClick={() => handleDelete(id)}></button>
             </span>
         </li>
     )
