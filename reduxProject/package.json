@@ -1,5 +1,5 @@
 {
-  "name": "hero_admin_panel",
+  "name": "redux_project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"npx json-server heroes.json --port 3001\"",
+    "start": "concurrently \"react-scripts start\" \"npx json-server deities.json --port 3001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

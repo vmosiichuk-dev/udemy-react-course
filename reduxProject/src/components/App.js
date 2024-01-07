@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { error, fetching, fetchedHeroes, fetchedFilters } from "../store/actions"
+import { error, fetching, fetchedDeities, fetchedFilters } from "../store/actions"
 import { useHttp } from "../hooks/http.hook"
 
 import List from "./List"
@@ -19,8 +19,8 @@ const App = () => {
             .catch(() => dispatch(error()) )
         
         dispatch(fetching())
-        request("http://localhost:3001/heroes")
-            .then(data => dispatch(fetchedHeroes(data)) )
+        request("http://localhost:3001/deities")
+            .then(data => dispatch(fetchedDeities(data)) )
             .catch(() => dispatch(error()) )
 
         // eslint-disable-next-line

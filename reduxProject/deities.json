@@ -1,0 +1,53 @@
+{
+  "deities": [
+    {
+      "id": 0,
+      "name": "Helios",
+      "domain": "God of the Sun, driving its chariot through the sky",
+      "element": "fire"
+    },
+    {
+      "id": 1,
+      "name": "Ouranus",
+      "domain": "The god of the Sky and The Heavens",
+      "element": "wind"
+    },
+    {
+      "id": 2,
+      "name": "Poseidon",
+      "domain": "God of the sea, storms, earthquakes, and horses",
+      "element": "water"
+    },
+    {
+      "id": "2acd600e-d3fc-4aeb-a35d-442b69e7f60a",
+      "name": "Aphrodite",
+      "domain": "Goddess of love, lust, passion, pleasure, beauty, and sexuality",
+      "element": "earth"
+    },
+    {
+      "id": "cd3e8819-1669-4fe7-8849-6bc2277ad8b9",
+      "name": "Nyx",
+      "domain": "Primordial goddess of the night and hellhounds",
+      "element": "earth"
+    },
+    {
+      "id": "5e938c31-3c9a-465d-b923-46244aeee7c5",
+      "name": "Theia",
+      "domain": "The goddess of divine light, is the ether of bright blue sky",
+      "element": "wind"
+    },
+    {
+      "id": "ee74f385-b4ff-4732-b113-1f4328574310",
+      "name": "Hades",
+      "domain": "God of Underworld",
+      "element": "earth"
+    }
+  ],
+  "filters": [
+    "all",
+    "fire",
+    "water",
+    "wind",
+    "earth"
+  ]
+}

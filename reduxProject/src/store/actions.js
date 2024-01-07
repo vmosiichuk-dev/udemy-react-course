@@ -2,8 +2,8 @@ export const fetching = () => ({
     type: "STATUS_FETCHING"
 })
 
-export const fetchedHeroes = (payload) => ({
-    type: "STATUS_HEROES_FETCHED", payload: payload
+export const fetchedDeities = (payload) => ({
+    type: "STATUS_DEITIES_FETCHED", payload: payload
 })
 
 export const fetchedFilters = (payload) => ({
@@ -18,8 +18,8 @@ export const name = (payload) => ({
     type: "FORM_INPUT_NAME", payload: payload
 })
 
-export const skill = (payload) => ({ 
-    type: "FORM_INPUT_SKILL", payload: payload
+export const domain = (payload) => ({ 
+    type: "FORM_INPUT_DOMAIN", payload: payload
 })
 
 export const element = (payload) => ({ 
@@ -32,4 +32,8 @@ export const submit = (payload) => ({
 
 export const filterChange = (payload) => ({ 
     type: "FILTER_CHANGE", payload: payload 
+})
+
+export const deleteDeity = (payload) => ({ 
+    type: "DELETE_DEITY", payload: payload 
 })

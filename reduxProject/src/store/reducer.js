@@ -1,8 +1,8 @@
 const initialState = {
-    heroes: [],
+    deities: [],
     filters: [],
     nameValue: "",
-    skillValue: "",
+    domainValue: "",
     elementValue: "",
     status: "idle",
     activeFilter: "all"
@@ -14,9 +14,9 @@ const reducer = (state = initialState, action) => {
             ...state,
             status: "loading"
         }
-        case "STATUS_HEROES_FETCHED": return {
+        case "STATUS_DEITIES_FETCHED": return {
             ...state,
-            heroes: action.payload,
+            deities: action.payload,
             status: "idle"
         }
         case "STATUS_FILTERS_FETCHED": return {
@@ -32,9 +32,9 @@ const reducer = (state = initialState, action) => {
             ...state,
             nameValue: action.payload
         }
-        case "FORM_INPUT_SKILL": return {
+        case "FORM_INPUT_DOMAIN": return {
             ...state,
-            skillValue: action.payload
+            domainValue: action.payload
         }
         case "FORM_INPUT_ELEMENT": return {
             ...state,
@@ -42,11 +42,15 @@ const reducer = (state = initialState, action) => {
         }
         case "FORM_SUBMIT": return {
             ...state,
-            heroes: [...state.heroes, action.payload]
+            deities: [...state.deities, action.payload]
         }
         case "FILTER_CHANGE": return {
             ...state,
             activeFilter: action.payload
+        }
+        case "DELETE_DEITY": return {
+            ...state,
+            deities: state.deities.filter(deity => deity.id !== action.payload)
         }
         default: return state
     }

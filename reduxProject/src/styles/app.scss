@@ -2,17 +2,36 @@
     height: 100dvh;
     width: 100dvw;
     overflow-y: scroll;
-    background: url("../assets/01.jpeg") top / cover no-repeat;
+    background-color: #eefaff;
+    background-image: url("../assets/greek.svg");
 }
 
 .content {
     display: grid;
     grid-template-columns: 560px 440px;
     max-width: 1040px;
-    margin: 0 15% 0 auto;
+    margin: 0 auto;
     padding-top: 50px;
     
     &__interactive {
         padding-left: 40px;
     }
+}
+
+.bg-card {
+    background: transparent !important;
+}
+
+.bg-glass {
+    background: rgba(15, 30, 88, 0.4);
+    border: 2px solid rgba(48, 89, 142, 0.3) !important;
+    color: ghostwhite !important;
+}
+
+.bg-opacity {
+    --bs-bg-opacity: .5 !important;
+}
+
+.min-w-140 {
+    min-width: 140px;
 }

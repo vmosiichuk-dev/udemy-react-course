@@ -1,26 +1,26 @@
 import { useSelector, useDispatch } from "react-redux"
-import { name, skill, element, submit, error } from "../store/actions"
+import { name, domain, element, submit, error } from "../store/actions"
 import { useHttp } from "../hooks/http.hook"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
-    const { nameValue, skillValue, elementValue, filters } = useSelector(state => state)
+    const { nameValue, domainValue, elementValue, filters } = useSelector(state => state)
     const dispatch = useDispatch()
     const { request } = useHttp()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const userAddedHero = {
+        const userAddedDeity = {
             id: uuidv4(),
             name: nameValue, 
-            skill: skillValue, 
+            domain: domainValue, 
             element: elementValue
         }
 
         try {
-            await request("http://localhost:3001/heroes", "POST", JSON.stringify(userAddedHero))
-            dispatch(submit(userAddedHero))
+            await request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
+            dispatch(submit(userAddedDeity))
         } catch (err) {
             dispatch(error())
         }
@@ -37,7 +37,7 @@ const AddForm = () => {
     const options = renderOptions(filters)
 
     return (
-        <form className="border p-4 shadow-lg rounded" onSubmit={handleSubmit}>
+        <form className="bg-glass p-4 shadow-lg rounded-3" onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Name</label>
                 <input 
@@ -48,20 +48,20 @@ const AddForm = () => {
                     name="name" 
                     className="form-control" 
                     id="name" 
-                    placeholder="What is the hero's name?"
+                    placeholder="What is the deity's name?"
                 />
             </div>
             <div className="mb-3">
-                <label htmlFor="skill" className="form-label fs-4">Skill</label>
+                <label htmlFor="domain" className="form-label fs-4">Domain</label>
                 <input
                     required
-                    value={skillValue}
-                    onChange={(e) => dispatch(skill(e.target.value))}
+                    value={domainValue}
+                    onChange={(e) => dispatch(domain(e.target.value))}
                     type="text"
-                    name="skill" 
+                    name="domain" 
                     className="form-control" 
-                    id="skill" 
-                    placeholder="What is the hero's main ability?"
+                    id="domain" 
+                    placeholder="What is the deity's main ability?"
                 />
             </div>
             <div className="mb-3">
@@ -77,7 +77,7 @@ const AddForm = () => {
                     {options}
                 </select>
             </div>
-            <button type="submit" className="btn btn-primary">Add hero</button>
+            <button type="submit" className="btn btn-primary">Add deity</button>
         </form>
     )
 }
