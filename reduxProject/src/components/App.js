@@ -13,7 +13,7 @@ const App = () => {
     const { request } = useHttp()
 
     useEffect(() => {
-        dispatch(fetchData(request, ["deities", "filters"]))
+        dispatch(fetchData(request))
     }, [dispatch, request])
 
     return (
