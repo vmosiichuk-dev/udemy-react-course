@@ -30,7 +30,7 @@ const AddForm = () => {
             setElementValue("")
         })
         .catch(err => { 
-            dispatch(error())
+            dispatch(error)
             console.error("Error deleting item", err)
         })
     }, [request, dispatch, nameValue, domainValue, elementValue, setNameValue, setDomainValue, setElementValue])

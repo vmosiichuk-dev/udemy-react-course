@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { error, fetching, fetchedDeities, fetchedFilters } from "../store/actions"
+import { fetchData } from "../store/actions"
 import { useHttp } from "../hooks/http.hook"
 
 import List from "./List"
@@ -13,22 +13,8 @@ const App = () => {
     const { request } = useHttp()
 
     useEffect(() => {
-        dispatch(fetching())
-        request("http://localhost:3001/filters")
-            .then(data => {
-                console.log(data)
-                dispatch(fetchedFilters(data))
-             })
-            .catch(() => dispatch(error()) )
-        
-        dispatch(fetching())
-        request("http://localhost:3001/deities")
-            .then(data => {
-                console.log(data)
-                dispatch(fetchedDeities(data))
-             })
-            .catch(() => dispatch(error()) )
-    }, [request, dispatch])
+        dispatch(fetchData(request, ["deities", "filters"]))
+    }, [dispatch, request])
 
     return (
         <main className="app">

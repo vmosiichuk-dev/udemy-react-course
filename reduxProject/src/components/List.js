@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "reselect"
 import { useHttp } from "../hooks/http.hook"
-import { deleteDeity, error } from "../store/actions"
+import { deleteDeity } from "../store/actions"
 import ListItem from "./ListItem"
 import Spinner from "./Spinner"
 
@@ -23,13 +23,8 @@ const List = () => {
     const dispatch = useDispatch()
     const { request } = useHttp()
 
-    const handleDelete = useCallback((deityID) => {
-        request(`http://localhost:3001/deities/${deityID}`, "DELETE")
-        .then(dispatch(deleteDeity(deityID)))
-        .catch(err => { 
-            dispatch(error())
-            console.error("Error deleting item", err)
-        })
+    const handleDelete = useCallback(deityID => {
+        dispatch(deleteDeity(request, deityID))
     }, [request, dispatch])
     
     if (status === "loading") {
