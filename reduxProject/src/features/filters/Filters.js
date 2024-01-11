@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterChange } from "../store/actions"
+import { filterChange } from "../../reducer/actions"
 import classNames from "classnames"
 
 const Filters = () => {

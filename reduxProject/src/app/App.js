@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { fetchData } from "../store/actions"
-import { useHttp } from "../hooks/http.hook"
+import { fetchData } from "../reducer/actions"
+import { useHttp } from "../hooks/useHttp"
 
-import List from "./List"
-import AddForm from "./AddForm"
-import Filters from "./Filters"
+import List from "../features/deities/List"
+import AddForm from "../features/deities/AddForm"
+import Filters from "../features/filters/Filters"
 import "../styles/app.scss"
 
 const App = () => {

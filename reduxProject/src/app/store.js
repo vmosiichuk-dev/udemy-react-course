@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
-import reducer from "./reducer"
+import reducer from "../reducer/reducer"
 
 const stringMiddleware = () => (dispatch) => (action) => {
     if (typeof action === "string") {

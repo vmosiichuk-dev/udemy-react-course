@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { submit/* , error */ } from "../store/actions"
-import { useHttp } from "../hooks/http.hook"
+import { submit/* , error */ } from "../../reducer/actions"
+import { useHttp } from "../../hooks/useHttp"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
