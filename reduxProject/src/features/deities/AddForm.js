@@ -1,20 +1,19 @@
 import { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { submit/* , error */ } from "../../reducer/actions"
+import { submitDeity } from "../../reducer/actions"
 import { useHttp } from "../../hooks/useHttp"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
     const filters = useSelector(state => state.filters)
-    const [nameValue, setNameValue] = useState("")
-    const [domainValue, setDomainValue] = useState("")
-    const [elementValue, setElementValue] = useState("")
     const dispatch = useDispatch()
     const { request } = useHttp()
 
-    const handleSubmit = useCallback(e => {
-        e.preventDefault()
+    const [nameValue, setNameValue] = useState("")
+    const [domainValue, setDomainValue] = useState("")
+    const [elementValue, setElementValue] = useState("")
 
+    const handleSubmit = useCallback(e => {
         const userAddedDeity = {
             id: uuidv4(),
             name: nameValue, 
@@ -22,17 +21,12 @@ const AddForm = () => {
             element: elementValue
         }
 
-        request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
-        .then(dispatch(submit(userAddedDeity)))
-        .then(() => {
-            setNameValue("")
-            setDomainValue("")
-            setElementValue("")
-        })
-        .catch(err => { 
-            /* dispatch(error) */
-            console.error("Error deleting item", err)
-        })
+        e.preventDefault()        
+        dispatch(submitDeity({ request, userAddedDeity }))
+
+        setNameValue("")
+        setDomainValue("")
+        setElementValue("")
     }, [request, dispatch, nameValue, domainValue, elementValue, setNameValue, setDomainValue, setElementValue])
 
     const renderOptions = (filters) => {

@@ -1,30 +1,50 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit"
 
-export const submit = createAction("FORM_SUBMIT")
-export const filterChange = createAction("FILTER_CHANGE")
+export const fetchDeities = createAsyncThunk("FETCH_DEITIES", async (_, { rejectWithValue }) => {
+    try {
+        const deitiesResponse = await fetch("http://localhost:3001/deities")
+        const deities = await deitiesResponse.json()
 
+        return { deities }
+    } catch (error) {
+        console.error("Error occurred while fetching deities.", error)
+        return rejectWithValue(error.message)
+    }
+})
+
+export const submitDeity = createAsyncThunk("SUBMIT_DEITY", async ({ request, userAddedDeity }, { rejectWithValue }) => {
+    try {
+        await request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
+
+        return { userAddedDeity }
+    } catch (error) {
+        console.error("Error occurred while submitting form.", error)
+        return rejectWithValue(error.message)
+    }
+})
 
 export const deleteDeity = createAsyncThunk("DELETE_DEITY", async ({ request, deityID }, { rejectWithValue }) => {
     try {
         await request(`http://localhost:3001/deities/${deityID}`, "DELETE")
+
         return { deityID }
     } catch (error) {
-        console.error("Error deleting item. DeityID: " + deityID, error)
+        console.error("Error occurred while deleting item.", error)
         return rejectWithValue(error.message)
     }
 })
 
-export const fetchData = createAsyncThunk("FETCH_DATA", async (_, { rejectWithValue }) => {
+export const fetchFilters = createAsyncThunk("FETCH_FILTERS", async (_, { rejectWithValue }) => {
     try {
-        const deitiesResponse = await fetch("http://localhost:3001/deities")
         const filtersResponse = await fetch("http://localhost:3001/filters")
-    
-        const deities = await deitiesResponse.json()
         const filters = await filtersResponse.json()
-    
-        return { deities, filters }
+        console.log(filters)
+
+        return { filters }
     } catch (error) {
-        console.error("Error fetching data", error)
+        console.error("Error occurred while fetching filters.", error)
         return rejectWithValue(error.message)
     }
 })
+
+export const filterChange = createAction("FILTER_CHANGE")

@@ -1,6 +1,6 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterChange } from "../../reducer/actions"
+import { fetchFilters, filterChange } from "../../reducer/actions"
 import classNames from "classnames"
 
 const Filters = () => {
@@ -8,6 +8,10 @@ const Filters = () => {
     const filters = useSelector(state => state.filters)
     const activeFilter = useSelector(state => state.activeFilter)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchFilters())
+    }, [dispatch])
 
     const renderFilterBtns = (filters) => {
         if (filters.length === 0) {

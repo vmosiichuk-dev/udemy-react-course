@@ -1,9 +1,9 @@
-import { useCallback } from "react"
+import { useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "reselect"
 import { useHttp } from "../../hooks/useHttp"
-import { deleteDeity } from "../../reducer/actions"
-import ListItem from "./ListItem"
+import { fetchDeities, deleteDeity } from "../../reducer/actions"
+import ListItem from "../../components/ListItem"
 import Spinner from "../../components/Spinner"
 
 const List = () => {
@@ -24,8 +24,12 @@ const List = () => {
     const { request } = useHttp()
 
     const handleDelete = useCallback(deityID => {
-        dispatch(deleteDeity({ request: request, deityID: deityID }))
+        dispatch(deleteDeity({ request, deityID }))
     }, [request, dispatch])
+
+    useEffect(() => {
+        dispatch(fetchDeities())
+    }, [dispatch])
     
     if (status === "loading") {
         return <Spinner/>
