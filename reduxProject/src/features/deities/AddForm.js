@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { submitDeity } from "../../reducer/actions"
+import { deitiesSubmitForm } from "./deitiesSlice"
 import { useHttp } from "../../hooks/useHttp"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
-    const filters = useSelector(state => state.filters)
+    const filters = useSelector(state => state.filters.filters)
     const dispatch = useDispatch()
     const { request } = useHttp()
 
@@ -22,7 +22,7 @@ const AddForm = () => {
         }
 
         e.preventDefault()        
-        dispatch(submitDeity({ request, userAddedDeity }))
+        dispatch(deitiesSubmitForm({ request, userAddedDeity }))
 
         setNameValue("")
         setDomainValue("")

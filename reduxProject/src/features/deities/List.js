@@ -2,14 +2,14 @@ import { useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "reselect"
 import { useHttp } from "../../hooks/useHttp"
-import { fetchDeities, deleteDeity } from "../../reducer/actions"
+import { deitiesFetchList, deitiesDeleteItem } from "./deitiesSlice"
 import ListItem from "../../components/ListItem"
 import Spinner from "../../components/Spinner"
 
 const List = () => {
     const filteredDeitiesSelector = createSelector(
-        state => state.activeFilter,
-        state => state.deities,
+        state => state.filters.activeFilter,
+        state => state.deities.deities,
         (activeFilter, deities) => {
             if (activeFilter === "all") {
                 return deities
@@ -19,16 +19,16 @@ const List = () => {
         }
     )
     const filteredDeities = useSelector(filteredDeitiesSelector)
-    const status = useSelector(state => state.status)
+    const status = useSelector(state => state.deities.status)
     const dispatch = useDispatch()
     const { request } = useHttp()
 
     const handleDelete = useCallback(deityID => {
-        dispatch(deleteDeity({ request, deityID }))
+        dispatch(deitiesDeleteItem({ request, deityID }))
     }, [request, dispatch])
 
     useEffect(() => {
-        dispatch(fetchDeities())
+        dispatch(deitiesFetchList())
     }, [dispatch])
     
     if (status === "loading") {

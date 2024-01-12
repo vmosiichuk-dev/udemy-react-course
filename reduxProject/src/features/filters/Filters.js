@@ -1,16 +1,16 @@
 import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchFilters, filterChange } from "../../reducer/actions"
+import { filtersFetchList, filtersChangeActive } from "./filtersSlice"
 import classNames from "classnames"
 
 const Filters = () => {
     const filterContainerRef = useRef(null)
-    const filters = useSelector(state => state.filters)
-    const activeFilter = useSelector(state => state.activeFilter)
+    const filters = useSelector(state => state.filters.filters)
+    const activeFilter = useSelector(state => state.filters.activeFilter)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchFilters())
+        dispatch(filtersFetchList())
     }, [dispatch])
 
     const renderFilterBtns = (filters) => {
@@ -26,7 +26,7 @@ const Filters = () => {
             return <button 
                 key={filter}
                 className={btnClass} 
-                onClick={() => dispatch(filterChange(filter))}>
+                onClick={() => dispatch(filtersChangeActive(filter))}>
                 {filter.charAt(0).toUpperCase() + filter.slice(1)}
             </button>
         })

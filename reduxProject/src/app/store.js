@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
-import reducer from "../reducer/reducer"
+import deities from "../features/deities/deitiesSlice"
+import filters from "../features/filters/filtersSlice"
 
 const stringMiddleware = () => (dispatch) => (action) => {
     if (typeof action === "string") {
@@ -10,7 +11,7 @@ const stringMiddleware = () => (dispatch) => (action) => {
 }
 
 const store = configureStore({
-    reducer: reducer,
+    reducer: { deities, filters },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware),
     devTools: process.env.NODE_ENV !== "production"
 })
