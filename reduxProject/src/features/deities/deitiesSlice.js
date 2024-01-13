@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { useHttp } from "../../hooks/useHttp"
 
 const initialState = {
     status: "idle",
@@ -22,8 +23,9 @@ export const deitiesFetchList = createAsyncThunk(
 
 export const deitiesSubmitForm = createAsyncThunk(
     "deities/deitiesSubmitForm", 
-    async ({ request, userAddedDeity }, { rejectWithValue }) => {
+    async (userAddedDeity, { rejectWithValue }) => {
         try {
+            const { request } = useHttp()
             await request("http://localhost:3001/deities", "POST", JSON.stringify(userAddedDeity))
 
             return { userAddedDeity }
@@ -36,8 +38,9 @@ export const deitiesSubmitForm = createAsyncThunk(
 
 export const deitiesDeleteItem = createAsyncThunk(
     "deities/deitiesDeleteItem", 
-    async ({ request, deityID }, { rejectWithValue }) => {
+    async (deityID, { rejectWithValue }) => {
         try {
+            const { request } = useHttp()
             await request(`http://localhost:3001/deities/${deityID}`, "DELETE")
 
             return { deityID }

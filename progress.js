@@ -1,8 +1,8 @@
-let current = 206
-// Update { current } with the last completed lecture
+let current = 208
+// Update ${current} with the last completed lecture
 
 const start = 117
-const finish = 213
+const finish = 212
 
 function calculateProgress(start, finish, current) {
     const total = finish - start
