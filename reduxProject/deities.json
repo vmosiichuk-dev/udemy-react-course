@@ -51,22 +51,27 @@
   ],
   "filters": [
     {
+      "id": "filter__all",
       "filter": "all",
       "className": "btn-outline-dark"
     },
     {
+      "id": "filter__fire",
       "filter": "fire",
       "className": "btn-danger"
     },
     {
+      "id": "filter__water",
       "filter": "water",
       "className": "btn-primary"
     },
     {
+      "id": "filter__wind",
       "filter": "wind",
       "className": "btn-warning"
     },
     {
+      "id": "filter__earth",
       "filter": "earth",
       "className": "btn-success"
     }

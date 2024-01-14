@@ -1,10 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-
-const initialState = {
-    status: "idle",
-    filters: [],
-    activeFilter: "all"
-}
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit"
 
 export const filtersFetchList = createAsyncThunk(
     "filters/filtersFetchList", 
@@ -12,7 +6,6 @@ export const filtersFetchList = createAsyncThunk(
         try {
             const filtersResponse = await fetch("http://localhost:3001/filters")
             const filters = await filtersResponse.json()
-            console.log(filters)
 
             return { filters }
         } catch (error) {
@@ -21,6 +14,13 @@ export const filtersFetchList = createAsyncThunk(
         }
     }
 )
+
+const filtersAdapter = createEntityAdapter()
+
+const initialState = filtersAdapter.getInitialState({ 
+    status: "idle", 
+    activeFilter: "all"
+})
 
 const filtersSlice = createSlice({
     name: "filters",
@@ -34,7 +34,7 @@ const filtersSlice = createSlice({
         builder
         .addCase(filtersFetchList.fulfilled, (state, action) => {
             state.status = "idle"
-            state.filters = action.payload.filters
+            filtersAdapter.setAll(state, action.payload.filters)
         })
         .addCase(filtersFetchList.rejected, state => {
             state.status = "error"
@@ -46,3 +46,4 @@ const { actions, reducer } = filtersSlice
 
 export default reducer
 export const { filtersChangeActive } = actions 
+export const { selectAll } = filtersAdapter.getSelectors(state => state.filters)

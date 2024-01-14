@@ -1,10 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { useHttp } from "../../hooks/useHttp"
-
-const initialState = {
-    status: "idle",
-    deities: []
-}
+import { createSlice, createAsyncThunk, createEntityAdapter, createSelector } from "@reduxjs/toolkit"
 
 export const deitiesFetchList = createAsyncThunk(
     "deities/deitiesFetchList", 
@@ -51,6 +46,12 @@ export const deitiesDeleteItem = createAsyncThunk(
     }
 )
 
+const deitiesAdapter = createEntityAdapter()
+
+const initialState = deitiesAdapter.getInitialState({ 
+    status: "idle" 
+})
+
 const deitiesSlice = createSlice({
     name: "deities",
     initialState, 
@@ -59,7 +60,7 @@ const deitiesSlice = createSlice({
         builder
         .addCase(deitiesFetchList.fulfilled, (state, action) => {
             state.status = "idle"
-            state.deities = action.payload.deities
+            deitiesAdapter.setAll(state, action.payload.deities)
         })
         .addCase(deitiesFetchList.pending, state => {
             state.status = "loading"
@@ -68,13 +69,13 @@ const deitiesSlice = createSlice({
             state.status = "error"
         })
         .addCase(deitiesSubmitForm.fulfilled, (state, action) => {
-            state.deities = state.deities.concat(action.payload.userAddedDeity)
+            deitiesAdapter.addOne(state, action.payload.userAddedDeity)
         })
         .addCase(deitiesSubmitForm.rejected, state => {
             state.status = "error"
         })
         .addCase(deitiesDeleteItem.fulfilled, (state, action) => {
-            state.deities = state.deities.filter(deity => deity.id !== action.payload.deityID)
+            deitiesAdapter.removeOne(state, action.payload.deityID)
         })
         .addCase(deitiesDeleteItem.rejected, state => {
             state.status = "error"
@@ -82,6 +83,18 @@ const deitiesSlice = createSlice({
     }
 })
 
-const { reducer } = deitiesSlice
+const { selectAll } = deitiesAdapter.getSelectors(state => state.deities)
 
-export default reducer
+export const filteredDeitiesSelector = createSelector(
+    state => state.filters.activeFilter,
+    selectAll,
+    (activeFilter, deities) => {
+        if (activeFilter === "all") {
+            return deities
+        } else {
+            return deities.filter(item => item.element === activeFilter)
+        }
+    }
+)
+
+export default deitiesSlice.reducer

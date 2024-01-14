@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { deitiesSubmitForm } from "./deitiesSlice"
+import { selectAll as selectAllFilters } from "../filters/filtersSlice"
 import { v4 as uuidv4 } from "uuid"
 
 const AddForm = () => {
-    const filters = useSelector(state => state.filters.filters)
+    const filters = useSelector(selectAllFilters)
     const dispatch = useDispatch()
 
     const [nameValue, setNameValue] = useState("")

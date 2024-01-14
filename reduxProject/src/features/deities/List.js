@@ -1,22 +1,10 @@
 import { useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createSelector } from "@reduxjs/toolkit"
-import { deitiesFetchList, deitiesDeleteItem } from "./deitiesSlice"
+import { deitiesFetchList, deitiesDeleteItem, filteredDeitiesSelector } from "./deitiesSlice"
 import ListItem from "../../components/ListItem"
 import Spinner from "../../components/Spinner"
 
 const List = () => {
-    const filteredDeitiesSelector = createSelector(
-        state => state.filters.activeFilter,
-        state => state.deities.deities,
-        (activeFilter, deities) => {
-            if (activeFilter === "all") {
-                return deities
-            } else {
-                return deities.filter(item => item.element === activeFilter)
-            }
-        }
-    )
     const filteredDeities = useSelector(filteredDeitiesSelector)
     const status = useSelector(state => state.deities.status)
     const dispatch = useDispatch()
@@ -40,9 +28,7 @@ const List = () => {
             return <h5 className="text-center mt-5">There are no entries yet</h5>
         }
 
-        let arrReversed = []
-        for (let i = 0; i < arr.length; i++) arrReversed.unshift(arr[i])
-
+        const arrReversed = arr.slice().reverse()
         return arrReversed.map(({id, ...props}) => {
             return <ListItem key={id} id={id} handleDelete={handleDelete} {...props}/>
         })

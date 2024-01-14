@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filtersFetchList, filtersChangeActive } from "./filtersSlice"
+import { filtersFetchList, filtersChangeActive, selectAll as selectAllFilters } from "./filtersSlice"
 import classNames from "classnames"
 
 const Filters = () => {
     const filterContainerRef = useRef(null)
-    const filters = useSelector(state => state.filters.filters)
+    const filters = useSelector(selectAllFilters)
     const activeFilter = useSelector(state => state.filters.activeFilter)
     const dispatch = useDispatch()
 
