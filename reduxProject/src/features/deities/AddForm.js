@@ -1,16 +1,15 @@
 import { useState, useCallback } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { deitiesSubmitForm } from "./deitiesSlice"
-import { selectAll as selectAllFilters } from "../filters/filtersSlice"
+import { useAddDeityMutation } from "../../api/apiSlice"
 import { v4 as uuidv4 } from "uuid"
+import { useGetFiltersQuery } from "../../api/apiSlice" 
 
 const AddForm = () => {
-    const filters = useSelector(selectAllFilters)
-    const dispatch = useDispatch()
-
+    const { data: filters = [] } = useGetFiltersQuery()
     const [nameValue, setNameValue] = useState("")
     const [domainValue, setDomainValue] = useState("")
     const [elementValue, setElementValue] = useState("")
+
+    const [addDeity] = useAddDeityMutation()
 
     const handleSubmit = useCallback(e => {
         const userAddedDeity = {
@@ -20,13 +19,13 @@ const AddForm = () => {
             element: elementValue
         }
 
-        e.preventDefault()        
-        dispatch(deitiesSubmitForm(userAddedDeity))
+        e.preventDefault()    
+        addDeity(userAddedDeity).unwrap()    
 
         setNameValue("")
         setDomainValue("")
         setElementValue("")
-    }, [dispatch, nameValue, domainValue, elementValue, setNameValue, setDomainValue, setElementValue])
+    }, [addDeity, nameValue, domainValue, elementValue, setNameValue, setDomainValue, setElementValue])
 
     const renderOptions = (filters) => {
         if (filters.length === 0) return null

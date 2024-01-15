@@ -1,33 +1,36 @@
-import { useEffect, useCallback } from "react"
-import { useDispatch/* , useSelector */ } from "react-redux"
-import { deitiesFetchList, deitiesDeleteItem/* , filteredDeitiesSelector */ } from "./deitiesSlice"
-import { useGetDeitiesQuery } from "../../api/apiSlice"
+import { useCallback, useMemo } from "react"
+import { useSelector } from "react-redux"
+import { useGetDeitiesQuery, useDeleteDeityMutation } from "../../api/apiSlice"
 import ListItem from "../../components/ListItem"
 import Spinner from "../../components/Spinner"
 
 const List = () => {
     const {
         data: deities = [],
-        isFetching,
         isLoading,
-        isSuccess,
         isError,
         error
     } = useGetDeitiesQuery()
 
-    // const filteredDeities = useSelector(filteredDeitiesSelector)
-    // const status = useSelector(state => state.deities.status)
-    const dispatch = useDispatch()
+    const activeFilter = useSelector(state => state.filters.activeFilter)
+
+    const filteredDeities = useMemo(() => {
+        const filteredDeities = deities.slice()
+
+        if (activeFilter === "all") {
+            return filteredDeities
+        } else {
+            return filteredDeities.filter(item => item.element === activeFilter)
+        }
+    }, [activeFilter, deities])
+
+    const [deleteDeity] = useDeleteDeityMutation()
 
     const handleDelete = useCallback(deityID => {
-        dispatch(deitiesDeleteItem(deityID))
-    }, [dispatch])
-
-    useEffect(() => {
-        dispatch(deitiesFetchList())
-    }, [dispatch])
+        deleteDeity(deityID)
+    }, [deleteDeity])
     
-    if (isLoading || isFetching) {
+    if (isLoading) {
         return <Spinner/>
     } else if (isError) {
         return <h5 className="text-center mt-5">{error}</h5>
@@ -44,7 +47,7 @@ const List = () => {
         })
     }
 
-    const elements = renderList(deities, handleDelete)
+    const elements = renderList(filteredDeities, handleDelete)
 
     return (
         <ul>

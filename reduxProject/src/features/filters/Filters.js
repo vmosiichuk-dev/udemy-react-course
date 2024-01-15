@@ -1,17 +1,14 @@
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filtersFetchList, filtersChangeActive, selectAll as selectAllFilters } from "./filtersSlice"
+import { filtersChangeActive } from "./filtersSlice"
+import { useGetFiltersQuery } from "../../api/apiSlice" 
 import classNames from "classnames"
 
 const Filters = () => {
+    const { data: filters = [] } = useGetFiltersQuery()
     const filterContainerRef = useRef(null)
-    const filters = useSelector(selectAllFilters)
     const activeFilter = useSelector(state => state.filters.activeFilter)
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(filtersFetchList())
-    }, [dispatch])
 
     const renderFilterBtns = (filters) => {
         if (filters.length === 0) {
