@@ -1,12 +1,12 @@
 # [Full Course on JavaScript + React](https://www.udemy.com/course/javascript_full/)
-### :star::star::star::star::star: (16,915 Ratings)
+### :star::star::star::star::star: (17,054 Ratings)
 
 ```javascript
 courseDetails {
     author: Ivan Petrichenko,
-    rating: 4.8,    
-    ratingCount: 16 915,
-    students: 45 560,
+    rating: 4.7,    
+    ratingCount: 17 054,
+    students: 47 029,
     tests: 2,
     tasks: 55,
     lectures: 224,
@@ -22,7 +22,13 @@ Progress: ![100%](https://geps.dev/progress/100)
 
 ### [React 18 + Redux](https://www.github.com/vladnomad/udemy-react-course/)
 
-Progress: ![99%](https://geps.dev/progress/99)
+Progress: ![100%](https://geps.dev/progress/100)
+
+### [Certificate](https://www.udemy.com/certificate/UC-fa391465-cf3b-4aec-b6d5-130e373c8939/)
+
+This certificate above verifies that Vlad Mosiichuk successfully completed the course "Full Course on JavaScript + React" on 01.13.2024 as taught by Ivan Petrichenko on Udemy. 
+The certificate indicates the entire course was completed as validated by the student. 
+The course duration represents the total video hours of the course at time of most recent completion.
 
 ## What the Course Covers
 
