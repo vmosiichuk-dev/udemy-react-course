@@ -1,12 +1,22 @@
 import { useEffect, useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { deitiesFetchList, deitiesDeleteItem, filteredDeitiesSelector } from "./deitiesSlice"
+import { useDispatch/* , useSelector */ } from "react-redux"
+import { deitiesFetchList, deitiesDeleteItem/* , filteredDeitiesSelector */ } from "./deitiesSlice"
+import { useGetDeitiesQuery } from "../../api/apiSlice"
 import ListItem from "../../components/ListItem"
 import Spinner from "../../components/Spinner"
 
 const List = () => {
-    const filteredDeities = useSelector(filteredDeitiesSelector)
-    const status = useSelector(state => state.deities.status)
+    const {
+        data: deities = [],
+        isFetching,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetDeitiesQuery()
+
+    // const filteredDeities = useSelector(filteredDeitiesSelector)
+    // const status = useSelector(state => state.deities.status)
     const dispatch = useDispatch()
 
     const handleDelete = useCallback(deityID => {
@@ -17,10 +27,10 @@ const List = () => {
         dispatch(deitiesFetchList())
     }, [dispatch])
     
-    if (status === "loading") {
+    if (isLoading || isFetching) {
         return <Spinner/>
-    } else if (status === "error") {
-        return <h5 className="text-center mt-5">Error occured while loading</h5>
+    } else if (isError) {
+        return <h5 className="text-center mt-5">{error}</h5>
     }
 
     const renderList = (arr, handleDelete) => {
@@ -34,7 +44,7 @@ const List = () => {
         })
     }
 
-    const elements = renderList(filteredDeities, handleDelete)
+    const elements = renderList(deities, handleDelete)
 
     return (
         <ul>
